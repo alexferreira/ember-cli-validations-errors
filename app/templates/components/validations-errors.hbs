@@ -1,0 +1,8 @@
+<p><strong>{{t contacts.error_messages}}:</strong></p>
+<ul>
+  {{#each e in validationErrors}}
+    {{#if e.errors}}
+      <li>{{e.errors}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
