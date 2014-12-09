@@ -64,7 +64,7 @@ export var ValidationErrorsView = Ember.Mixin.create({
     this._super();
     var controller = this.get('controller')
       , errors = controller.get('errors')
-      , errorsSerialized = this.get('errors').serialize()
+      , errorsSerialized = errors !== null && (typeof errors.serialize) === 'function' ? errors.serialize() : errors
       , errorsKeys = _.keys(errorsSerialized);
 
     errorsKeys.forEach(function(property){
