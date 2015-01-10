@@ -10,7 +10,7 @@ export var ValidationErrorsController = Ember.Mixin.create({
 
       errorsKeys.forEach(function(property){
         Ember.addObserver(errors, property, this, function(){
-          var errorsSerialized = errors !== null && (typeof errors.serialize) === 'function' ? errors.serialize() : errors;
+          var errorsSerialized = errors && (typeof errors.serialize) === 'function' ? errors.serialize() : errors;
           var errLength = _.size(errorsSerialized);
 
           if(errorsKeys.length !== errLength){
@@ -43,7 +43,7 @@ export var ValidationErrorsView = Ember.Mixin.create({
 
     errorsKeys.forEach(function(property){
       Ember.addObserver(errors, property, this, function(){
-        var errorsSerialized = errors !== null && (typeof errors.serialize) === 'function' ? errors.serialize() : errors;
+        var errorsSerialized = errors && (typeof errors.serialize) === 'function' ? errors.serialize() : errors;
         var errLength = _.size(errorsSerialized);
 
         if(errorsKeys.length !== errLength){
@@ -64,7 +64,7 @@ export var ValidationErrorsView = Ember.Mixin.create({
     this._super();
     var controller = this.get('controller')
       , errors = controller.get('errors')
-      , errorsSerialized = errors !== null && (typeof errors.serialize) === 'function' ? errors.serialize() : errors
+      , errorsSerialized = errors && (typeof errors.serialize) === 'function' ? errors.serialize() : errors
       , errorsKeys = _.keys(errorsSerialized);
 
     errorsKeys.forEach(function(property){
@@ -72,4 +72,3 @@ export var ValidationErrorsView = Ember.Mixin.create({
     }, this);
   }
 });
-
