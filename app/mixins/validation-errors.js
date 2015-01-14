@@ -1,35 +1,6 @@
 import Ember from 'ember';
 
-export var ValidationErrorsController = Ember.Mixin.create({
-  validationErrors: Ember.A(),
-  init: function(){
-    this._super();
-    Ember.run.next(function(){
-      var errors = this.get('content.errors')
-        , errorsKeys = Ember.keys(errors);
-
-      errorsKeys.forEach(function(property){
-        Ember.addObserver(errors, property, this, function(){
-          var errorsSerialized = errors && (typeof errors.serialize) === 'function' ? errors.serialize() : errors;
-          var errLength = _.size(errorsSerialized);
-
-          if(errorsKeys.length !== errLength){
-            this.errExec();
-            return false;
-          }
-
-          var arr = _.map(errorsSerialized, function(v, k){
-            return Ember.Object.create({key: k, errors: v});
-          });
-
-          this.set('validationErrors', arr);
-        }, this);
-      }.bind(this));
-    }.bind(this));
-  }
-});
-
-export var ValidationErrorsView = Ember.Mixin.create({
+export default  Ember.Mixin.create({
   init: function(){
     this._super();
     Ember.run.next(function(){
@@ -53,9 +24,9 @@ export var ValidationErrorsView = Ember.Mixin.create({
 
         _.each(errorsSerialized, function(v, k){
           if(v.length > 0 && this.get('isValidating'))
-            this.$('[id="'+k+'"]').addClass('required');
+            this.$('#'+k).addClass('required');
           else
-            this.$('[id="'+k+'"]').removeClass('required');
+            this.$('#'+k).removeClass('required');
         }.bind(this));
       }, this);
     }.bind(this));
