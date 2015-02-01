@@ -10,7 +10,9 @@ export default Ember.Component.extend({
 
       errorsKeys.forEach(function(property){
         Ember.addObserver(errors, property, this, function(){
-          this.validationsErrorsChanged(property);
+          Ember.run.debounce(this, function (){
+            this.validationsErrorsChanged(property);
+          }, 200);
         }, this);
       }.bind(this));
     }.bind(this));
