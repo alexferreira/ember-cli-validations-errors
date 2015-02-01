@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-validations-errors",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Validation pannel for ember-validation",
   "author": "Alex Ferreira <alex@dsol.com.br>",
   "homepage": "https://github.com/alexferreira/ember-cli-validations-errors",
